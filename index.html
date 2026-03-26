@@ -7,44 +7,157 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
-            body { font-family: 'Inter', sans-serif; background-color: #fdf2f8; }
-            .header-arc { background: linear-gradient(135deg, #f472b6, #db2777); padding-bottom: 60px; border-radius: 0 0 50% 50% / 0 0 20% 20%; }
+            body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
+            .header-arc { background: linear-gradient(135deg, #db2777, #9333ea); padding-bottom: 80px; border-radius: 0 0 40px 40px; }
+            .filter-btn.active { background-color: #db2777; color: white; }
         </style>
     </head>
     <body>
-        <header class="header-arc pt-10 text-center text-white shadow-lg">
-            <h1 class="text-2xl font-black uppercase tracking-tighter">Super App Ipuã</h1>
-            <p class="text-[10px] font-bold opacity-80 uppercase mt-2">O comércio da nossa cidade em um só lugar</p>
+        <header class="header-arc pt-12 text-center text-white shadow-2xl px-6">
+            <h1 class="text-3xl font-black uppercase tracking-tighter">Super App Ipuã</h1>
+            <p class="text-[10px] font-bold opacity-90 uppercase mt-2 tracking-widest">Tudo o que você precisa em um só lugar</p>
+            
+            <div class="mt-8 relative max-w-md mx-auto">
+                <input type="text" id="searchInput" onkeyup="filtrar()" placeholder="O que você procura em Ipuã?" 
+                class="w-full p-4 rounded-2xl border-none text-gray-800 shadow-xl focus:ring-2 focus:ring-pink-400 outline-none text-sm">
+                <i class="fa-solid fa-magnifying-glass absolute right-4 top-4 text-gray-400"></i>
+            </div>
         </header>
-        <main class="px-6 -mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 pb-20">
+
+        <nav class="flex gap-3 overflow-x-auto px-6 -mt-8 pb-4 no-scrollbar">
+            <button onclick="filtrarCategoria('todos')" class="filter-btn active flex-shrink-0 bg-white shadow-lg px-5 py-3 rounded-2xl text-xs font-black uppercase">🌟 Todos</button>
+            <button onclick="filtrarCategoria('alimentacao')" class="filter-btn flex-shrink-0 bg-white shadow-lg px-5 py-3 rounded-2xl text-xs font-black uppercase">🍔 Comida</button>
+            <button onclick="filtrarCategoria('saude')" class="filter-btn flex-shrink-0 bg-white shadow-lg px-5 py-3 rounded-2xl text-xs font-black uppercase">💊 Saúde</button>
+            <button onclick="filtrarCategoria('mercado')" class="filter-btn flex-shrink-0 bg-white shadow-lg px-5 py-3 rounded-2xl text-xs font-black uppercase">🛒 Mercado</button>
+            <button onclick="filtrarCategoria('loja')" class="filter-btn flex-shrink-0 bg-white shadow-lg px-5 py-3 rounded-2xl text-xs font-black uppercase">🛍️ Lojas</button>
+            <button onclick="filtrarCategoria('servico')" class="filter-btn flex-shrink-0 bg-white shadow-lg px-5 py-3 rounded-2xl text-xs font-black uppercase">🛠️ Serviços</button>
+        </nav>
+
+        <main id="containerNegocios" class="px-6 mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 pb-24">
     
-        <div class="bg-white rounded-[32px] overflow-hidden shadow-xl border border-pink-50">
-            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&sig=563" class="w-full h-48 object-cover">
-            <div class="p-5">
-                <span class="text-[10px] font-black text-pink-500 uppercase tracking-widest">Alimentação</span>
-                <h2 class="text-xl font-black text-gray-800 mt-1">Pizzaria do Bairro</h2>
-                <p class="text-gray-500 text-xs mt-2 italic">🔥 Borda grátis!</p>
-                <a href="https://wa.me/5516999999999" class="block w-full bg-pink-600 text-white text-center font-black py-4 rounded-2xl mt-4 uppercase text-xs shadow-lg">Pedir no WhatsApp</a>
+            <div class="card-negocio bg-white rounded-[2.5rem] shadow-xl overflow-hidden border border-gray-100 transition-all duration-300" data-categoria="alimentacao">
+                <img src="https://source.unsplash.com/400x300/?pizza" class="w-full h-44 object-cover">
+                <div class="p-6">
+                    <h3 class="nome-negocio font-black text-xl text-gray-800 mb-1">Pizzaria Ki-Delícia</h3>
+                    <p class="text-[10px] text-gray-400 mb-4 italic"><i class="fa-solid fa-location-dot"></i> Centro</p>
+                    <div class="bg-pink-50 p-3 rounded-2xl mb-6 border border-pink-100">
+                        <p class="text-pink-600 font-black text-xs text-center uppercase italic">🎁 Borda Recheada Grátis</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="https://wa.me/5516999999999" class="bg-green-500 text-white text-center font-black py-4 rounded-2xl text-[10px] uppercase shadow-lg shadow-green-100 flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                        </a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Pizzaria Ki-Delícia+Ipuã+Centro" target="_blank" class="bg-gray-800 text-white text-center font-black py-4 rounded-2xl text-[10px] uppercase flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-route text-sm"></i> Rota
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
         
-        <div class="bg-white rounded-[32px] overflow-hidden shadow-xl border border-pink-50">
-            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=400&q=80&sig=595" class="w-full h-48 object-cover">
-            <div class="p-5">
-                <span class="text-[10px] font-black text-pink-500 uppercase tracking-widest">Mercado</span>
-                <h2 class="text-xl font-black text-gray-800 mt-1">Hortifruti Central</h2>
-                <p class="text-gray-500 text-xs mt-2 italic">🔥 Quarta da Fruta!</p>
-                <a href="https://wa.me/5516999999999" class="block w-full bg-pink-600 text-white text-center font-black py-4 rounded-2xl mt-4 uppercase text-xs shadow-lg">Pedir no WhatsApp</a>
+            <div class="card-negocio bg-white rounded-[2.5rem] shadow-xl overflow-hidden border border-gray-100 transition-all duration-300" data-categoria="saude">
+                <img src="https://source.unsplash.com/400x300/?pharmacy" class="w-full h-44 object-cover">
+                <div class="p-6">
+                    <h3 class="nome-negocio font-black text-xl text-gray-800 mb-1">Farmácia São José</h3>
+                    <p class="text-[10px] text-gray-400 mb-4 italic"><i class="fa-solid fa-location-dot"></i> Av. Principal</p>
+                    <div class="bg-pink-50 p-3 rounded-2xl mb-6 border border-pink-100">
+                        <p class="text-pink-600 font-black text-xs text-center uppercase italic">🎁 Desconto em Vitaminas</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="https://wa.me/5516999999999" class="bg-green-500 text-white text-center font-black py-4 rounded-2xl text-[10px] uppercase shadow-lg shadow-green-100 flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                        </a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Farmácia São José+Ipuã+Av. Principal" target="_blank" class="bg-gray-800 text-white text-center font-black py-4 rounded-2xl text-[10px] uppercase flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-route text-sm"></i> Rota
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
         
-        <div class="bg-white rounded-[32px] overflow-hidden shadow-xl border border-pink-50">
-            <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=400&sig=866" class="w-full h-48 object-cover">
-            <div class="p-5">
-                <span class="text-[10px] font-black text-pink-500 uppercase tracking-widest">Saúde</span>
-                <h2 class="text-xl font-black text-gray-800 mt-1">Farmácia São José</h2>
-                <p class="text-gray-500 text-xs mt-2 italic">🔥 20% em Genéricos!</p>
-                <a href="https://wa.me/5516999999999" class="block w-full bg-pink-600 text-white text-center font-black py-4 rounded-2xl mt-4 uppercase text-xs shadow-lg">Pedir no WhatsApp</a>
+            <div class="card-negocio bg-white rounded-[2.5rem] shadow-xl overflow-hidden border border-gray-100 transition-all duration-300" data-categoria="mercado">
+                <img src="https://source.unsplash.com/400x300/?market" class="w-full h-44 object-cover">
+                <div class="p-6">
+                    <h3 class="nome-negocio font-black text-xl text-gray-800 mb-1">Supermercado Ipuã</h3>
+                    <p class="text-[10px] text-gray-400 mb-4 italic"><i class="fa-solid fa-location-dot"></i> Rua 4</p>
+                    <div class="bg-pink-50 p-3 rounded-2xl mb-6 border border-pink-100">
+                        <p class="text-pink-600 font-black text-xs text-center uppercase italic">🎁 Quarta da Fruta</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="https://wa.me/5516999999999" class="bg-green-500 text-white text-center font-black py-4 rounded-2xl text-[10px] uppercase shadow-lg shadow-green-100 flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                        </a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Supermercado Ipuã+Ipuã+Rua 4" target="_blank" class="bg-gray-800 text-white text-center font-black py-4 rounded-2xl text-[10px] uppercase flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-route text-sm"></i> Rota
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-        </main></body></html>
+        
+            <div class="card-negocio bg-white rounded-[2.5rem] shadow-xl overflow-hidden border border-gray-100 transition-all duration-300" data-categoria="loja">
+                <img src="https://source.unsplash.com/400x300/?clothing" class="w-full h-44 object-cover">
+                <div class="p-6">
+                    <h3 class="nome-negocio font-black text-xl text-gray-800 mb-1">Boutique Fashion</h3>
+                    <p class="text-[10px] text-gray-400 mb-4 italic"><i class="fa-solid fa-location-dot"></i> Centro</p>
+                    <div class="bg-pink-50 p-3 rounded-2xl mb-6 border border-pink-100">
+                        <p class="text-pink-600 font-black text-xs text-center uppercase italic">🎁 15% OFF na primeira compra</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="https://wa.me/5516999999999" class="bg-green-500 text-white text-center font-black py-4 rounded-2xl text-[10px] uppercase shadow-lg shadow-green-100 flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                        </a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Boutique Fashion+Ipuã+Centro" target="_blank" class="bg-gray-800 text-white text-center font-black py-4 rounded-2xl text-[10px] uppercase flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-route text-sm"></i> Rota
+                        </a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card-negocio bg-white rounded-[2.5rem] shadow-xl overflow-hidden border border-gray-100 transition-all duration-300" data-categoria="servico">
+                <img src="https://source.unsplash.com/400x300/?tools" class="w-full h-44 object-cover">
+                <div class="p-6">
+                    <h3 class="nome-negocio font-black text-xl text-gray-800 mb-1">João Eletricista</h3>
+                    <p class="text-[10px] text-gray-400 mb-4 italic"><i class="fa-solid fa-location-dot"></i> Atendimento Domicílio</p>
+                    <div class="bg-pink-50 p-3 rounded-2xl mb-6 border border-pink-100">
+                        <p class="text-pink-600 font-black text-xs text-center uppercase italic">🎁 Orçamento Grátis</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="https://wa.me/5516999999999" class="bg-green-500 text-white text-center font-black py-4 rounded-2xl text-[10px] uppercase shadow-lg shadow-green-100 flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                        </a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=João Eletricista+Ipuã+Atendimento Domicílio" target="_blank" class="bg-gray-800 text-white text-center font-black py-4 rounded-2xl text-[10px] uppercase flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-route text-sm"></i> Rota
+                        </a>
+                    </div>
+                </div>
+            </div>
+        
+        </main>
+
+        <script>
+            function filtrar() {
+                let input = document.getElementById('searchInput').value.toLowerCase();
+                let cards = document.getElementsByClassName('card-negocio');
+                for (let card of cards) {
+                    let nome = card.querySelector('.nome-negocio').innerText.toLowerCase();
+                    card.style.display = nome.includes(input) ? "block" : "none";
+                }
+            }
+
+            function filtrarCategoria(cat) {
+                let cards = document.getElementsByClassName('card-negocio');
+                let botoes = document.getElementsByClassName('filter-btn');
+                
+                for (let btn of botoes) btn.classList.remove('active');
+                event.currentTarget.classList.add('active');
+
+                for (let card of cards) {
+                    if (cat === 'todos') {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = card.getAttribute('data-categoria') === cat ? "block" : "none";
+                    }
+                }
+            }
+        </script>
+    </body>
+    </html>
+    
