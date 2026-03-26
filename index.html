@@ -2,175 +2,184 @@
     <!DOCTYPE html>
     <html lang="pt-br">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Super App Ipuã</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-            body { font-family: 'Inter', sans-serif; background-color: #fff; }
-            .swiper { width: 100%; height: 180px; border-radius: 24px; }
-            .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
-            .no-scrollbar::-webkit-scrollbar { display: none; }
-            .btn-filtro.ativo { background-color: #ea1d2c; color: white; }
-        </style>
+        
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #fff; }
+        .swiper { width: 100%; height: 180px; border-radius: 24px; }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .btn-filtro.ativo { background-color: #ea1d2c; color: white; }
+        .pagina-comerciante { 
+            display: none; position: fixed; top: 0; left: 0; 
+            width: 100%; height: 100%; background: white; 
+            z-index: 100; overflow-y: auto;
+        }
+    </style>
+    
     </head>
     <body class="pb-24">
 
-        <header class="p-5 sticky top-0 bg-white z-50 border-b border-gray-50">
-            <div class="flex justify-between items-center mb-4">
-                <span class="text-[#ea1d2c] font-black text-2xl italic tracking-tighter">IPUÃ TEM TUDO</span>
-                <span class="text-[10px] font-bold bg-gray-100 px-3 py-1 rounded-full text-gray-500 uppercase">Ipuã - SP</span>
-            </div>
-            <div class="relative">
-                <input type="text" id="inputBusca" onkeyup="funcaoBusca()" placeholder="O que você precisa em Ipuã?" 
-                class="w-full bg-gray-100 p-4 rounded-2xl text-sm border-none outline-none focus:ring-2 focus:ring-red-200 transition">
-                <i class="fa-solid fa-magnifying-glass absolute right-4 top-4 text-gray-400"></i>
-            </div>
-        </header>
-
-        <div class="px-5 mt-4">
-            <div class="swiper mySwiper shadow-xl shadow-red-50">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80"></div>
-                    <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80"></div>
-                    <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=800&q=80"></div>
+        <div id="view-principal">
+            <header class="p-5 sticky top-0 bg-white z-50 border-b border-gray-50">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[#ea1d2c] font-black text-2xl italic tracking-tighter">IPUÃ TEM TUDO</span>
+                    <span class="text-[10px] font-bold bg-gray-100 px-3 py-1 rounded-full text-gray-500 uppercase">Ipuã - SP</span>
                 </div>
-                <div class="swiper-pagination"></div>
+                <div class="relative">
+                    <input type="text" id="inputBusca" onkeyup="funcaoBusca()" placeholder="O que você precisa em Ipuã?" 
+                    class="w-full bg-gray-100 p-4 rounded-2xl text-sm border-none outline-none focus:ring-2 focus:ring-red-200 transition">
+                    <i class="fa-solid fa-magnifying-glass absolute right-4 top-4 text-gray-400"></i>
+                </div>
+            </header>
+
+            <div class="px-5 mt-4">
+                <div class="swiper mySwiper shadow-xl shadow-red-50">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80"></div>
+                        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80"></div>
+                        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80"></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
             </div>
-        </div>
 
-        <div class="flex gap-4 overflow-x-auto px-5 py-6 no-scrollbar">
-            <button onclick="filtrarCat('todos')" class="btn-filtro ativo flex-shrink-0 px-5 py-2 rounded-full border border-gray-100 text-[10px] font-bold uppercase shadow-sm">🌟 Todos</button>
-            <button onclick="filtrarCat('alimentacao')" class="btn-filtro flex-shrink-0 px-5 py-2 rounded-full border border-gray-100 text-[10px] font-bold uppercase shadow-sm">🍔 Comida</button>
-            <button onclick="filtrarCat('saude')" class="btn-filtro flex-shrink-0 px-5 py-2 rounded-full border border-gray-100 text-[10px] font-bold uppercase shadow-sm">💊 Saúde</button>
-            <button onclick="filtrarCat('mercado')" class="btn-filtro flex-shrink-0 px-5 py-2 rounded-full border border-gray-100 text-[10px] font-bold uppercase shadow-sm">🛒 Mercado</button>
-            <button onclick="filtrarCat('servico')" class="btn-filtro flex-shrink-0 px-5 py-2 rounded-full border border-gray-100 text-[10px] font-bold uppercase shadow-sm">🛠️ Serviços</button>
-        </div>
+            <div class="flex gap-4 overflow-x-auto px-5 py-6 no-scrollbar">
+                <button onclick="filtrarCat('todos')" class="btn-filtro ativo flex-shrink-0 px-5 py-2 rounded-full border border-gray-100 text-[10px] font-bold uppercase shadow-sm">🌟 Todos</button>
+                <button onclick="filtrarCat('alimentacao')" class="btn-filtro flex-shrink-0 px-5 py-2 rounded-full border border-gray-100 text-[10px] font-bold uppercase shadow-sm">🍔 Comida</button>
+                <button onclick="filtrarCat('saude')" class="btn-filtro flex-shrink-0 px-5 py-2 rounded-full border border-gray-100 text-[10px] font-bold uppercase shadow-sm">💊 Saúde</button>
+                <button onclick="filtrarCat('mercado')" class="btn-filtro flex-shrink-0 px-5 py-2 rounded-full border border-gray-100 text-[10px] font-bold uppercase shadow-sm">🛒 Mercado</button>
+                <button onclick="filtrarCat('servico')" class="btn-filtro flex-shrink-0 px-5 py-2 rounded-full border border-gray-100 text-[10px] font-bold uppercase shadow-sm">🛠️ Serviços</button>
+            </div>
 
-        <main id="listaLojas" class="px-5 space-y-6">
+            <main id="listaLojas" class="px-5 space-y-6">
     
-            <div class="card-loja flex gap-4 items-center border-b border-gray-50 pb-6 transition-all" data-categoria="alimentacao">
-                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80" class="w-20 h-20 rounded-2xl object-cover shadow-md border border-gray-100">
-                <div class="flex-1">
-                    <div class="flex justify-between items-center">
-                        <h4 class="nome-loja font-bold text-gray-800 text-sm">Pizzaria Ki-Delícia</h4>
-                        <span class="text-[#ffb100] text-[10px] font-bold"><i class="fa-solid fa-star"></i> 4.9</span>
-                    </div>
-                    <p class="text-gray-400 text-[9px] mt-1 italic uppercase font-medium">alimentacao • 35 min</p>
-                    <p class="text-[#ea1d2c] text-[10px] font-black mt-2 uppercase tracking-tighter">🔥 Borda Recheada Grátis</p>
-                    
-                    <div class="flex gap-2 mt-4">
-                        <a href="https://wa.me/5516999999999" target="_blank" class="flex-1 bg-[#ea1d2c] text-white text-center py-2.5 rounded-xl text-[9px] font-black uppercase shadow-lg shadow-red-100 flex items-center justify-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
-                        </a>
-                        <a href="https://www.google.com/maps/search/Pizzaria Ki-Delícia+Ipuã+Centro" target="_blank" class="bg-gray-800 text-white px-4 py-2.5 rounded-xl text-[10px] flex items-center justify-center italic">
-                            <i class="fa-solid fa-route"></i>
-                        </a>
+                <div class="card-loja flex gap-4 items-center border-b border-gray-50 pb-6 cursor-pointer" 
+                     data-categoria="alimentacao" 
+                     onclick='abrirPagina("Pizzaria Ki-Delícia", "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800", [{"item": "Pizza Calabresa", "preco": "45,00"}, {"item": "Pizza Marguerita", "preco": "42,00"}, {"item": "Coca-Cola 2L", "preco": "12,00"}])'>
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800" class="w-20 h-20 rounded-2xl object-cover shadow-md">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-center">
+                            <h4 class="nome-loja font-bold text-gray-800 text-sm">Pizzaria Ki-Delícia</h4>
+                            <span class="text-[#ffb100] text-[10px] font-bold"><i class="fa-solid fa-star"></i> 4.9</span>
+                        </div>
+                        <p class="text-gray-400 text-[9px] mt-1 italic uppercase font-medium">alimentacao • 35 min</p>
+                        <p class="text-[#ea1d2c] text-[10px] font-black mt-2 uppercase tracking-tighter">🔥 Borda Recheada Grátis</p>
                     </div>
                 </div>
-            </div>
         
-            <div class="card-loja flex gap-4 items-center border-b border-gray-50 pb-6 transition-all" data-categoria="mercado">
-                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80" class="w-20 h-20 rounded-2xl object-cover shadow-md border border-gray-100">
-                <div class="flex-1">
-                    <div class="flex justify-between items-center">
-                        <h4 class="nome-loja font-bold text-gray-800 text-sm">Hortifruti Central</h4>
-                        <span class="text-[#ffb100] text-[10px] font-bold"><i class="fa-solid fa-star"></i> 4.8</span>
-                    </div>
-                    <p class="text-gray-400 text-[9px] mt-1 italic uppercase font-medium">mercado • 20 min</p>
-                    <p class="text-[#ea1d2c] text-[10px] font-black mt-2 uppercase tracking-tighter">🔥 Quarta da Fruta</p>
-                    
-                    <div class="flex gap-2 mt-4">
-                        <a href="https://wa.me/5516999999999" target="_blank" class="flex-1 bg-[#ea1d2c] text-white text-center py-2.5 rounded-xl text-[9px] font-black uppercase shadow-lg shadow-red-100 flex items-center justify-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
-                        </a>
-                        <a href="https://www.google.com/maps/search/Hortifruti Central+Ipuã+Rua 4" target="_blank" class="bg-gray-800 text-white px-4 py-2.5 rounded-xl text-[10px] flex items-center justify-center italic">
-                            <i class="fa-solid fa-route"></i>
-                        </a>
+                <div class="card-loja flex gap-4 items-center border-b border-gray-50 pb-6 cursor-pointer" 
+                     data-categoria="servico" 
+                     onclick='abrirPagina("João Eletricista", "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800", [{"item": "Instalação de Chuveiro", "preco": "80,00"}, {"item": "Troca de Tomada", "preco": "25,00"}, {"item": "Manutenção Quadro Luz", "preco": "Sob Consulta"}])'>
+                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800" class="w-20 h-20 rounded-2xl object-cover shadow-md">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-center">
+                            <h4 class="nome-loja font-bold text-gray-800 text-sm">João Eletricista</h4>
+                            <span class="text-[#ffb100] text-[10px] font-bold"><i class="fa-solid fa-star"></i> 4.7</span>
+                        </div>
+                        <p class="text-gray-400 text-[9px] mt-1 italic uppercase font-medium">servico • 60 min</p>
+                        <p class="text-[#ea1d2c] text-[10px] font-black mt-2 uppercase tracking-tighter">🛠️ Orçamento Grátis</p>
                     </div>
                 </div>
-            </div>
         
-            <div class="card-loja flex gap-4 items-center border-b border-gray-50 pb-6 transition-all" data-categoria="saude">
-                <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=800&q=80" class="w-20 h-20 rounded-2xl object-cover shadow-md border border-gray-100">
-                <div class="flex-1">
-                    <div class="flex justify-between items-center">
-                        <h4 class="nome-loja font-bold text-gray-800 text-sm">Drogasão Ipuã</h4>
-                        <span class="text-[#ffb100] text-[10px] font-bold"><i class="fa-solid fa-star"></i> 5.0</span>
-                    </div>
-                    <p class="text-gray-400 text-[9px] mt-1 italic uppercase font-medium">saude • 15 min</p>
-                    <p class="text-[#ea1d2c] text-[10px] font-black mt-2 uppercase tracking-tighter">🔥 20% OFF em Vitaminas</p>
-                    
-                    <div class="flex gap-2 mt-4">
-                        <a href="https://wa.me/5516999999999" target="_blank" class="flex-1 bg-[#ea1d2c] text-white text-center py-2.5 rounded-xl text-[9px] font-black uppercase shadow-lg shadow-red-100 flex items-center justify-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
-                        </a>
-                        <a href="https://www.google.com/maps/search/Drogasão Ipuã+Ipuã+Av. Principal" target="_blank" class="bg-gray-800 text-white px-4 py-2.5 rounded-xl text-[10px] flex items-center justify-center italic">
-                            <i class="fa-solid fa-route"></i>
-                        </a>
+                <div class="card-loja flex gap-4 items-center border-b border-gray-50 pb-6 cursor-pointer" 
+                     data-categoria="servico" 
+                     onclick='abrirPagina("IPTV Ipuã Digital", "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800", [{"item": "Mensal Premium", "preco": "35,00"}, {"item": "Trimestral Promo", "preco": "90,00"}, {"item": "Anual Black", "preco": "320,00"}])'>
+                    <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800" class="w-20 h-20 rounded-2xl object-cover shadow-md">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-center">
+                            <h4 class="nome-loja font-bold text-gray-800 text-sm">IPTV Ipuã Digital</h4>
+                            <span class="text-[#ffb100] text-[10px] font-bold"><i class="fa-solid fa-star"></i> 5.0</span>
+                        </div>
+                        <p class="text-gray-400 text-[9px] mt-1 italic uppercase font-medium">servico • Imediato</p>
+                        <p class="text-[#ea1d2c] text-[10px] font-black mt-2 uppercase tracking-tighter">📺 Teste Grátis 24h</p>
                     </div>
                 </div>
-            </div>
         
-            <div class="card-loja flex gap-4 items-center border-b border-gray-50 pb-6 transition-all" data-categoria="servico">
-                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400" class="w-20 h-20 rounded-2xl object-cover shadow-md border border-gray-100">
-                <div class="flex-1">
-                    <div class="flex justify-between items-center">
-                        <h4 class="nome-loja font-bold text-gray-800 text-sm">João Eletricista</h4>
-                        <span class="text-[#ffb100] text-[10px] font-bold"><i class="fa-solid fa-star"></i> 4.7</span>
-                    </div>
-                    <p class="text-gray-400 text-[9px] mt-1 italic uppercase font-medium">servico • 60 min</p>
-                    <p class="text-[#ea1d2c] text-[10px] font-black mt-2 uppercase tracking-tighter">🔥 Orçamento Grátis</p>
-                    
-                    <div class="flex gap-2 mt-4">
-                        <a href="https://wa.me/5516999999999" target="_blank" class="flex-1 bg-[#ea1d2c] text-white text-center py-2.5 rounded-xl text-[9px] font-black uppercase shadow-lg shadow-red-100 flex items-center justify-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
-                        </a>
-                        <a href="https://www.google.com/maps/search/João Eletricista+Ipuã+Atendimento Domicílio" target="_blank" class="bg-gray-800 text-white px-4 py-2.5 rounded-xl text-[10px] flex items-center justify-center italic">
-                            <i class="fa-solid fa-route"></i>
-                        </a>
+                <div class="card-loja flex gap-4 items-center border-b border-gray-50 pb-6 cursor-pointer" 
+                     data-categoria="mercado" 
+                     onclick='abrirPagina("Hortifruti Central", "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800", [{"item": "Dúzia de Laranja", "preco": "8,50"}, {"item": "Banana Prata (kg)", "preco": "6,00"}, {"item": "Alface Hidropônica", "preco": "3,50"}])'>
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800" class="w-20 h-20 rounded-2xl object-cover shadow-md">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-center">
+                            <h4 class="nome-loja font-bold text-gray-800 text-sm">Hortifruti Central</h4>
+                            <span class="text-[#ffb100] text-[10px] font-bold"><i class="fa-solid fa-star"></i> 4.8</span>
+                        </div>
+                        <p class="text-gray-400 text-[9px] mt-1 italic uppercase font-medium">mercado • 20 min</p>
+                        <p class="text-[#ea1d2c] text-[10px] font-black mt-2 uppercase tracking-tighter">🔥 Quarta da Fruta</p>
                     </div>
                 </div>
-            </div>
         
-        </main>
+            </main>
+        </div>
+
+        <div id="paginaLoja" class="pagina-comerciante">
+            <div class="relative h-64">
+                <button onclick="fecharPagina()" class="absolute top-6 left-6 z-10 bg-white w-10 h-10 rounded-full shadow-xl flex items-center justify-center">
+                    <i class="fa-solid fa-arrow-left text-gray-800"></i>
+                </button>
+                <img id="detalheImg" src="" class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
+                    <h2 id="detalheNome" class="text-2xl font-black italic uppercase"></h2>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <h3 class="font-black text-gray-800 border-b-2 border-red-500 pb-1 mb-6 uppercase text-sm">Opções & Preços</h3>
+                <div id="listaProdutos" class="space-y-4"></div>
+                <a href="https://wa.me/5516999999999" target="_blank" class="mt-10 w-full bg-[#ea1d2c] text-white text-center py-4 rounded-2xl font-black uppercase flex items-center justify-center gap-3">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Enviar Pedido
+                </a>
+            </div>
+        </div>
 
         <script>
-            // Script do Carrossel
-            var swiper = new Swiper(".mySwiper", {
-                loop: true,
-                autoplay: { delay: 3500, disableOnInteraction: false },
-                pagination: { el: ".swiper-pagination", clickable: true },
-            });
+            var swiper = new Swiper(".mySwiper", { loop: true, autoplay: { delay: 3500 } });
 
-            // Função de Busca por Nome
+            function abrirPagina(nome, imagem, cardapio) {
+                document.getElementById('detalheNome').innerText = nome;
+                document.getElementById('detalheImg').src = imagem;
+                let container = document.getElementById('listaProdutos');
+                container.innerHTML = "";
+                cardapio.forEach(p => {
+                    container.innerHTML += `
+                        <div class="flex justify-between items-center bg-gray-50 p-5 rounded-2xl border border-gray-100">
+                            <h5 class="font-bold text-gray-800 text-xs uppercase italic">${p.item}</h5>
+                            <span class="text-[#ea1d2c] font-black text-sm">R$ ${p.preco}</span>
+                        </div>`;
+                });
+                document.getElementById('paginaLoja').style.display = 'block';
+                document.getElementById('view-principal').style.display = 'none';
+                window.scrollTo(0,0);
+            }
+
+            function fecharPagina() {
+                document.getElementById('paginaLoja').style.display = 'none';
+                document.getElementById('view-principal').style.display = 'block';
+            }
+
             function funcaoBusca() {
-                let termo = document.getElementById('inputBusca').value.toLowerCase();
+                let t = document.getElementById('inputBusca').value.toLowerCase();
                 let cards = document.getElementsByClassName('card-loja');
-                for (let card of cards) {
-                    let nome = card.querySelector('.nome-loja').innerText.toLowerCase();
-                    card.style.display = nome.includes(termo) ? "flex" : "none";
+                for (let c of cards) {
+                    let n = c.querySelector('.nome-loja').innerText.toLowerCase();
+                    c.style.display = n.includes(t) ? "flex" : "none";
                 }
             }
 
-            // Função de Filtro por Categoria
             function filtrarCat(categoria) {
                 let cards = document.getElementsByClassName('card-loja');
-                let botoes = document.getElementsByClassName('btn-filtro');
-                
-                for (let btn of botoes) btn.classList.remove('ativo');
+                let btns = document.getElementsByClassName('btn-filtro');
+                for (let b of btns) b.classList.remove('ativo');
                 event.currentTarget.classList.add('ativo');
-
-                for (let card of cards) {
-                    if (categoria === 'todos') {
-                        card.style.display = "flex";
-                    } else {
-                        card.style.display = card.getAttribute('data-categoria') === categoria ? "flex" : "none";
-                    }
+                for (let c of cards) {
+                    c.style.display = (categoria === 'todos' || c.getAttribute('data-categoria') === categoria) ? "flex" : "none";
                 }
             }
         </script>
